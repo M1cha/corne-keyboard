@@ -1,0 +1,13 @@
+manifest:
+  remotes:
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware
+
+  projects:
+    - name: zmk
+      remote: zmkfirmware
+      revision: 28ce23d4891eee3a1ef0a0d8187afe233d05cf81
+      import: app/west.yml
+
+  self:
+    path: corne-m1cha
