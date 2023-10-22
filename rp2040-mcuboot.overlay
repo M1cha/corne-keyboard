@@ -1,0 +1,39 @@
+/delete-node/ &code_partition;
+
+/ {
+	chosen {
+		zephyr,code-partition = &slot0_partition;
+		zephyr,flash-controller = &flash_controller;
+		zephyr,console = &cdc_acm_uart;
+	};
+};
+
+&pro_micro_serial { status = "disabled"; };
+
+&usbd {
+    cdc_acm_uart: cdc_acm_uart {
+        compatible = "zephyr,cdc-acm-uart";
+        label = "CDC_ACM_0";
+    };
+};
+
+&flash0 {
+	partitions {
+		boot_partition: partition@100 {
+			label = "mcuboot";
+			reg = <0x100 0xC000>;
+			read-only;
+		};
+
+		scratch_partition: partition@c100 {
+			label = "image-scratch";
+			reg = <0x0000c100 0x0001e000>;
+		};
+
+		slot0_partition: partition@2a100 {
+			label = "image-0";
+			reg = <0x2a100 (DT_SIZE_M(16) - 0x100 - 0xC000 - 0x2A100)>;
+			read-only;
+		};
+	};
+};

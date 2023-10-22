@@ -1,13 +1,28 @@
 manifest:
   remotes:
+    - name: upstream
+      url-base: https://github.com/zephyrproject-rtos
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: gcx-embedded
+      url-base: https://github.com/gcx-embedded
+
 
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: 28ce23d4891eee3a1ef0a0d8187afe233d05cf81
       import: app/west.yml
+      west-commands: app/scripts/west-commands.yml
+    - name: mcuboot
+      remote: upstream
+      revision: 13f63976bca672ee018f9d55f1e31f02f4135b64
+      path: bootloader/mcuboot
+    - name: cobs
+      repo-path: cobs
+      remote: gcx-embedded
+      revision: 02fa9bdb0ab5163dff48ac35ee72c98cccd909f4
+      path: modules/lib/cobs
 
   self:
     path: corne-m1cha

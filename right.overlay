@@ -1,0 +1,31 @@
+/ {
+	chosen {
+		zmk,split-serial = &pio1_uart0;
+	};
+};
+
+&pinctrl {
+	pio1_uart0_default: pio1_uart0_default {
+		rx_pins {
+			pinmux = <PIO1_P10>;
+			input-enable;
+			bias-pull-up;
+		};
+		tx_pins {
+			pinmux = <PIO1_P1>;
+		};
+	};
+};
+
+&pio1 {
+	status = "okay";
+
+	pio1_uart0: uart0 {
+		pinctrl-0 = <&pio1_uart0_default>;
+		pinctrl-names = "default";
+
+		compatible = "raspberrypi,pico-uart-pio";
+		current-speed = <115200>;
+		status = "okay";
+	};
+};
